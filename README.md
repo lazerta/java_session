@@ -1,0 +1,3 @@
+# For My JAVA MENTOR SESSION
+
+[THE BOOk NOTE](./java.md)
