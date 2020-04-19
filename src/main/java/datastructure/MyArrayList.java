@@ -42,15 +42,33 @@ public class MyArrayList<E> implements MyList<E> {
     }
 
     @Override
+    //O(1) +O(n)
     public boolean add(E e) {
+        //
+        // run n times = n *1 = N
+        // total cost of adding n element is
+
+        // add(1) 1
+        //add(2)1
+        //add(3)1
+        // total time spend for adding n elements is 2n
+        // how much time for adding each element on average ?
+        //  Answer: 2n/n = 2
+        // So we conclude add operation is a constant time
+        //O(1)
+
+        // Only Run when we added N  elements
         ensureCapacity();
+
         array[size++] = e;
         return true;
     }
 
     private void ensureCapacity() {
+
         //  if  size = capacity
         if (size  == CAPACITY -1) {
+            //O(N)
             //    double it capacity
             CAPACITY = CAPACITY * 2;
             //    create a new array of the capacity
@@ -65,6 +83,7 @@ public class MyArrayList<E> implements MyList<E> {
     }
 
     @Override
+    //O(N)
     public boolean remove(Object o) {
         // find the index of the element.
         int index = indexOf(o);
@@ -122,12 +141,14 @@ public class MyArrayList<E> implements MyList<E> {
 
     @Override
     public E get(int index) {
+        //O(1) Constance Time
         return array[index];
     }
 
     @Override
     public E set(int index, E element) {
         // we have return the old value
+        //O(1)
         E result = get(index);
         array[index] = element;
         return result;
@@ -135,6 +156,7 @@ public class MyArrayList<E> implements MyList<E> {
 
     @Override
     public void add(int index, E element) {
+        //o(n)
         if (index < 0 || index > size) {
             throw new IndexOutOfBoundsException(index + " is out of bound");
         }
@@ -175,9 +197,13 @@ public class MyArrayList<E> implements MyList<E> {
 
     @Override
     public int indexOf(Object o) {
+        //O(n) big oh
+        // average case  theta
+        //100n + 900n^2 = O(N^2)
+        // best  case oh mega
         //if can't find the object return -1;
         for (int i = 0; i < array.length; i++) {
-            if (array[i].equals(o)) {
+                if (array[i].equals(o)) {
                 return i;
             }
         }

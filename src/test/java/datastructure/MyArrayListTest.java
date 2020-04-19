@@ -1,30 +1,58 @@
 package datastructure;
 
 import org.testng.Assert;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-
 public class MyArrayListTest {
-    private MyList<Integer> list;
-    @BeforeTest
-    public void setUp(){
-        list = new MyArrayList<>(10);
 
+    private MyList<Integer> myList;
+
+    @BeforeMethod
+    public void setUp() {
+        myList = new MyArrayList<>(16);
+        for (int i = 0; i < 10; i++) {
+            myList.add(i);
+        }
     }
 
-    @Test
+    @AfterMethod
+    public void tearDown() {
+    }
+    @DataProvider()
+    public Object[][] provider(){
+     String[][] data = {
+
+             {"username","password"},
+             {"shawn","123"},
+             {"admin","admin"}
+
+     };
+     return data;
+
+    }
+    @Test(dataProvider = "provider")
+    public void testLogin(String username,String password){
+        System.out.println("username = "+username);
+        System.out.println("password = " + password);
+    }
+    @Test()
     public void testSize() {
-        list.add(1);
-        Assert.assertEquals(list.size(), 0);
+        int expected = 10;
+        Assert.assertEquals(myList.size(), expected);
     }
-
-    @Test
+    @Test()
     public void testIsEmpty() {
+        Assert.assertFalse(myList.isEmpty());
     }
 
     @Test
     public void testContains() {
+        int testData = 0;
+        Assert.assertTrue(myList.contains(testData));
+
     }
 
     @Test
@@ -61,9 +89,5 @@ public class MyArrayListTest {
 
     @Test
     public void testLastIndexOf() {
-    }
-
-    @Test
-    public void testTestToString() {
     }
 }
